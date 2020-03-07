@@ -11,7 +11,7 @@ This Employee Directory app is built to allow `json` data to be passed to the ap
 
 Use the search bar at the top of the page to search through the employee's names and emails.
 
-Use the sort buttons next to the desired column to sort the list into Ascending order.
+Use the sort buttons next to the desired column to sort the list into ascending order. Click the icon a second time to sort the field in descending order.
 
 ## Getting Started: Locally
 To run this app locally, be sure to `npm install` first.
