@@ -4,8 +4,6 @@ import employees from "../utils/employees";
 
 export default {
   getSearch: function(string) {
-    // console.log("---array---", array); // returns full list of employees
-    console.log("---string---", string); // returns string of input
     let searchEmp = [];
     employees.filter(obj => {
       let name = obj.name.toLowerCase();
@@ -20,18 +18,7 @@ export default {
         return "no results";
       }
     });
-    // searchEmp.push(filterName);
-    // console.log("---filterName API---", filterName);
-
     console.log("---searchEmp API---", searchEmp);
     return searchEmp;
-  },
-  // getSortedList: function(employees, sort, toggle) {
-  //   switch (toggle) {
-  //     case "asc": 
-  //       break;
-  //     case "dsc":
-  //       break;
-  //   }
-  // }
+  }
 };
