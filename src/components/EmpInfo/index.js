@@ -4,7 +4,6 @@ import Container from "../Container";
 import employees from "../../utils/employees";
 import API from "../../utils/API";
 
-let order = false;
 
 class Table extends React.Component {
     constructor(props){
@@ -13,68 +12,68 @@ class Table extends React.Component {
             search: "",
             employees: employees,
             results: [],
-            error: ""
+            error: "",
+            order: false
         };
     }
-
-    sortName = async (event) => {
+    
+    sortName = (event) => {
         event.preventDefault();
         const col = event.target.dataset.value;
         console.log("sorting by \n-----\n", col ,"\n--------\n ");
-        if (order === false) {
-            const sorted = [].concat(this.state.employees)
-            .sort(function (a, b) {
-                let keyToSort;
-                let x;
-                let y;
-                switch (col) {
-                    case "name":
-                        keyToSort = [a.name, b.name];
-                        x = keyToSort[0].toLowerCase();
-                        y = keyToSort[1].toLowerCase();
-                    break;
-                    case "email":
-                        keyToSort = [a.email, b.email];
-                        x = keyToSort[0].toLowerCase();
-                        y = keyToSort[1].toLowerCase();
-                    break;
-                    case "phone":
-                        keyToSort = [a.phone, b.phone];
-                        x = keyToSort[0].toLowerCase();
-                        y = keyToSort[1].toLowerCase();
-                    break;
-                    case "birth":
-                        keyToSort = [a.dateOfBirth, b.dateOfBirth];
-                        x = keyToSort[0];
-                        y = keyToSort[1];
-                    break;
-                    default:
-                        keyToSort = [a.name, b.name];
-                        break;
-                }
-                order = !order;
-                console.log(`${x} vs ${y}`);
-                switch (order) {
-                    case true:
-                        if (x < y) return -1;
-                        else if (x > y) return 1;
-                        else return 0;
-                    case false:
-                        if (x < y) return -1;
-                        else if (x > y) return 1;
-                        else return 0;
-                    default:
-                        if (x < y) return -1;
-                        else if (x > y) return 1;
-                        else return 0;
-                }
-            });
-            console.log("---sorted---", sorted);
-            this.setState({ 
-                ...this.state,
-                employees: sorted 
-            });
-        }
+        let currentlySorted = this.state.order;
+        const sorted = [].concat(this.state.employees)
+        .sort(function (a, b) {
+            let keyToSort;
+            let x;
+            let y;
+            switch (col) {
+                case "name":
+                    keyToSort = [a.name, b.name];
+                    x = keyToSort[0].toLowerCase();
+                    y = keyToSort[1].toLowerCase();
+                break;
+                case "email":
+                    keyToSort = [a.email, b.email];
+                    x = keyToSort[0].toLowerCase();
+                    y = keyToSort[1].toLowerCase();
+                break;
+                case "phone":
+                    keyToSort = [a.phone, b.phone];
+                    x = keyToSort[0].toLowerCase();
+                    y = keyToSort[1].toLowerCase();
+                break;
+                case "birth":
+                    keyToSort = [a.dateOfBirth, b.dateOfBirth];
+                    x = keyToSort[0];
+                    y = keyToSort[1];
+                break;
+                default:
+                    keyToSort = [a.name, b.name];
+                break;
+            }
+            console.log(`${x} vs ${y}`);
+            switch (currentlySorted) {
+                case true:
+                    if (x < y) return 1;
+                    else if (x > y) return -1;
+                    else return 0;
+                case false:
+                    if (x < y) return -1;
+                    else if (x > y) return 1;
+                    else return 0;
+                default:
+                    if (x < y) return -1;
+                    else if (x > y) return 1;
+                    else return 0;
+            }
+        });
+        console.log("---sorted---", sorted);
+        this.setState({ 
+            ...this.state,
+            employees: sorted,
+            order: !currentlySorted 
+        });
     }
 
     handleChange = (event) => {
