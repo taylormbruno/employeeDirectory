@@ -11,7 +11,7 @@ export default {
       let name = obj.name.toLowerCase();
       let email = obj.email.toLowerCase();
       let query = string.toLowerCase();
-      if ( (name.includes(query)) || (email.includes(string)) ) {
+      if ( (name.includes(query)) || (email.includes(query)) ) {
         console.log(`---OBJ ${obj.id}---`, obj);
         searchEmp.push(obj);
         return obj;
